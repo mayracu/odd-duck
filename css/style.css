@@ -36,12 +36,19 @@ img {
   border-width: 3px;
 }
 
+/*
 ul {
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
 ul li {margin: 5px;
+}*/
+
+div {
+  margin-top: 30px;
 }
+
+
 
 
