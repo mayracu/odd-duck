@@ -1,12 +1,13 @@
 body {
   background-color: rgb(96, 96, 183);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
 }
 
 h1{
   font-size: 3em;
   padding: 50px;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
 }
 
 button {
@@ -16,6 +17,10 @@ button {
 
 section {
   margin-bottom: 15px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 section img-container {
@@ -30,3 +35,13 @@ img {
   border-style: solid;
   border-width: 3px;
 }
+
+ul {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+ul li {margin: 5px;
+}
+
+
