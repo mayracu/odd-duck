@@ -11,7 +11,11 @@ let imgOne = document.getElementById('img-one');
 let imgTwo = document.getElementById('img-two');
 let imgThree = document.getElementById('img-three');
 let resultBtn = document.getElementById('show-results-btn');
-let resultsList = document.getElementById('results-container');
+/*let resultsList = document.getElementById('results-container');*/
+
+// *** Canvas element ***//
+
+let ctx = document.getElementById('my-chart');
 
 // **** CONSTRUCTOR FUNCTION ****
 
@@ -29,9 +33,26 @@ function randomIndexGenerator(){
   return Math.floor(Math.random() * productsArray.length);
 }
 
+let indexArray = [];
+console.log('index array start of while loop:', indexArray);
 function renderImgs(){
-  // DONE: get 3 random images on the page
+  while(indexArray.length < 6){
+    let randomNumber = randomIndexGenerator();
+    if(!indexArray.includes(randomNumber)){
+      indexArray.push(randomNumber);
+    }
+  }
+  console.log('index array end of while loop:', indexArray);
 
+
+
+  let imageOneIndex = indexArray.shift();
+  let imageTwoIndex = indexArray.shift();
+  let imageThreeIndex = indexArray.shift();
+
+  console.log(indexArray);
+  // DONE: get 3 random images on the page
+  /*
   let imageOneIndex = randomIndexGenerator();
   let imageTwoIndex = randomIndexGenerator();
   let imageThreeIndex = randomIndexGenerator();
@@ -40,7 +61,7 @@ function renderImgs(){
   while(imageOneIndex === imageTwoIndex || imageOneIndex === imageThreeIndex || imageTwoIndex === imageThreeIndex){
     imageOneIndex = randomIndexGenerator();
     imageTwoIndex = randomIndexGenerator();
-  }
+  }*/
 
   imgOne.src = productsArray[imageOneIndex].image;
   imgOne.title = productsArray[imageOneIndex].name;
@@ -57,6 +78,68 @@ function renderImgs(){
   productsArray[imageThreeIndex].views++;
 
 }
+
+
+// function grabbed from chartjs.org
+function renderChart(){
+  let productNames = [];
+  let productViews = [];
+  let productVotes = [];
+
+  for (let i=0; i< productsArray.length; i++){
+    productNames.push(productsArray[i].name);
+    productViews.push(productsArray[i].views);
+    productVotes.push(productsArray[i].votes);
+  }
+
+
+
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: productNames,
+      datasets: [{
+        label: '# of Views',
+        data: productViews,
+        borderWidth: 1,
+        backgroundColor: [
+          'rgb(255, 99, 132)'
+
+        ],
+        hoverOffset: 4
+      }, {
+        label: '# of Votes',
+        data: productVotes,
+        borderWidth: 1,
+        backgroundColor: [
+          'rgb(54, 162, 235)'
+
+        ],
+        hoverOffset: 4        
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          labels: {
+            // This more specific font property overrides the global property
+            font: {
+              size: 30
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+Chart.defaults.color = '#000';
 
 // **** EVENT HANDLERS ****
 
@@ -87,13 +170,17 @@ function handleImgClick(event){
 
 function handleShowResults(){
   if(votingRounds === 0){
-    for(let i = 0; i < productsArray.length; i++){
+    renderChart();
+
+
+
+    /*for(let i = 0; i < productsArray.length; i++){
       let productsListItem = document.createElement('li');
 
       productsListItem.textContent = `${productsArray[i].name} had ${productsArray[i].votes} votes and was seen ${productsArray[i].views} times`;
 
       resultsList.appendChild(productsListItem);
-    }
+    }*/
     resultBtn.removeEventListener('click', handleShowResults);
   }
 }
