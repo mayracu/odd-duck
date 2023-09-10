@@ -6,8 +6,12 @@ body {
 
 h1{
   font-size: 3em;
-  padding: 50px;
-  margin-bottom: 25px;
+  padding: 25px;
+}
+
+p{
+  font-size: 1em;
+  margin: 50px;
 }
 
 button {
@@ -36,17 +40,9 @@ img {
   border-width: 3px;
 }
 
-/*
-ul {
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
-ul li {margin: 5px;
-}*/
 
 div {
-  margin-top: 30px;
+margin: 50px;
 }
 
 
